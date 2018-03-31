@@ -96,7 +96,8 @@ The primary worktree cannot be deleted."
       (if (file-exists-p default-directory)
           (magit-run-git "worktree" "prune")
         (let ((default-directory primary))
-          (magit-run-git "worktree" "prune"))))))
+          (magit-run-git "worktree" "prune")
+          (magit-status))))))
 
 (defun magit-worktree-status (worktree)
   "Show the status for the worktree at point.
