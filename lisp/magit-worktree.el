@@ -54,6 +54,18 @@
   (magit-run-git "worktree" "add" (expand-file-name path) branch)
   (magit-diff-visit-directory path))
 
+(defun magit-worktree-checkout-pull-request (path pr)
+  "Create, configure and checkout a new branch from a pull-request.
+Please see the manual for more information."
+  (interactive
+   (let ((pr (magit-read-pull-request "Checkout pull request")))
+     (list (read-directory-name (format "Checkout #%s in new worktree: "
+                                        (cdr (assq 'number pr))))
+           pr)))
+  (magit-worktree-checkout
+   path (let ((inhibit-magit-refresh t))
+          (magit-branch-pull-request pr))))
+
 ;;;###autoload
 (defun magit-worktree-branch (path branch start-point &optional force)
   "Create a new BRANCH and check it out in a new worktree at PATH."
