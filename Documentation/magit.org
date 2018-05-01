@@ -3401,6 +3401,12 @@ of having to type out the command name.
   ~magit-find-file~), where REVISION is a parent of the revision that
   added the current line or chunk of lines.
 
+- Key: M-x magit-blame-echo, magit-blame-echo
+
+  This command is like ~magit-blame~ except that it doesn't turn on
+  ~read-only-mode~ and that it used the visualization style specified
+  by option ~magit-blame-echo-style~.
+
 - Key: M-x magit-blame-reverse, magit-blame-reverse
 
   This command augments each line or chunk of lines in the current
@@ -3478,33 +3484,31 @@ buffers that are being blamed.
   When the region is active, the command saves the region's content
   instead of the hash, like ~kill-ring-save~ would.
 
-- Key: t, magit-blame-toggle-headings
+- Key: c, magit-blame-cycle-style
 
-  This command shows or hides blame chunk headings.
+  This command changes how blame information is visualized in the
+  current buffer by cycling through the styles specified using the
+  option ~magit-blame-styles~.
 
-- User Option: magit-blame-heading-format
+- User Option: magit-blame-styles
 
-  The format string used for blame headings.
+  This option defines a list of styles used to visualize blame
+  information.  For now see its doc-string to learn more.
+
+- User Option: magit-blame-echo-style
+
+  This option specifies the blame visualization style used by the
+  command ~magit-blame-echo~.  This must be a symbol that is used as the
+  identifier for one of the styles defined in ~magit-blame-styles~.
 
 - User Option: magit-blame-time-format
 
-  The format string used for time strings in blame headings.
-
-- User Option: magit-blame-show-headings
-
-  This option controls whether blame block headings are initially
-  shown.  Whether blame headings are shown in the current buffer
-  can be changed using the command ~magit-blame-toggle-headings~.
-
-  When headings are not shown, then the information for the current
-  chunk is shown in the echo-area instead.  If you do not want that,
-  then remove ~magit-blame-maybe-show-message~ from
-  ~magit-blame-goto-chunk-hook~.
+  This option specifies the format string used to display times when
+  showing blame information.
 
 - User Option: magit-blame-goto-chunk-hook
 
-  This hook is run by ~magit-blame-next-chunk~ and
-  ~magit-blame-previous-chunk~.
+  This hook is run when moving between chunks.
 
 * Manipulating
 ** Repository Setup
